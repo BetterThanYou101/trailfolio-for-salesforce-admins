@@ -1,0 +1,194 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: 199 100% 44%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 19 100% 60%;
+  --secondary-foreground: 0 0% 100%;
+  --background: 0 0% 100%;
+  --foreground: 220 20% 12%;
+  --muted: 210 15% 96%;
+  --muted-foreground: 215 13% 45%;
+  --border: 210 14% 89%;
+  --card: 0 0% 100%;
+  --card-foreground: 220 20% 12%;
+  --accent: 199 100% 44%;
+  --accent-foreground: 0 0% 100%;
+  --radius: 0.75rem;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.08), 0 2px 6px rgba(0,0,0,0.05);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.06);
+}
+
+.dark {
+  --primary: 199 100% 50%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 19 100% 60%;
+  --secondary-foreground: 0 0% 100%;
+  --background: 220 22% 10%;
+  --foreground: 210 20% 92%;
+  --muted: 220 18% 16%;
+  --muted-foreground: 215 12% 58%;
+  --border: 220 15% 22%;
+  --card: 220 20% 13%;
+  --card-foreground: 210 20% 92%;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.3), 0 2px 6px rgba(0,0,0,0.2);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,0.4), 0 4px 12px rgba(0,0,0,0.25);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+  transition: background-color 0.3s ease, color 0.3s ease;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Space Grotesk', sans-serif;
+}
+
+/* Cloud pattern background */
+.cloud-pattern {
+  background-image: 
+    radial-gradient(ellipse at 20% 50%, hsla(199, 100%, 44%, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, hsla(19, 100%, 60%, 0.05) 0%, transparent 50%);
+}
+
+.dark .cloud-pattern {
+  background-image: 
+    radial-gradient(ellipse at 20% 50%, hsla(199, 100%, 50%, 0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, hsla(19, 100%, 60%, 0.06) 0%, transparent 50%);
+}
+
+/* Trail dots pattern */
+.trail-pattern {
+  background-image: radial-gradient(circle, hsl(var(--border)) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Smooth progress bar animation */
+@keyframes progressFill {
+  from { width: 0%; }
+  to { width: var(--progress-width); }
+}
+
+.progress-bar {
+  animation: progressFill 1.2s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  width: 0%;
+}
+
+/* Fade in up animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+  opacity: 0;
+}
+
+/* Pulse glow for ranger badge */
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 0 0 hsla(19, 100%, 60%, 0.4); }
+  50% { box-shadow: 0 0 0 8px hsla(19, 100%, 60%, 0); }
+}
+
+.ranger-glow {
+  animation: pulseGlow 2s ease-in-out infinite;
+}
+
+/* Coming soon ribbon */
+.ribbon {
+  position: absolute;
+  top: 12px;
+  right: -8px;
+  background: hsl(var(--secondary));
+  color: white;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 16px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 4px 50%);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  z-index: 10;
+}
+
+/* Card hover effect */
+.project-card {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Skill category animation stagger */
+.skill-item:nth-child(1) .progress-bar { animation-delay: 0.1s; }
+.skill-item:nth-child(2) .progress-bar { animation-delay: 0.2s; }
+.skill-item:nth-child(3) .progress-bar { animation-delay: 0.3s; }
+.skill-item:nth-child(4) .progress-bar { animation-delay: 0.4s; }
+
+/* Timeline connector */
+.timeline-dot {
+  position: relative;
+  z-index: 1;
+}
+
+.timeline-dot::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: hsla(199, 100%, 44%, 0.12);
+}
+
+/* Section heading underline */
+.section-title::after {
+  content: '';
+  display: block;
+  width: 48px;
+  height: 4px;
+  background: linear-gradient(90deg, hsl(199, 100%, 44%), hsl(19, 100%, 60%));
+  border-radius: 2px;
+  margin-top: 10px;
+}
+
+.section-title-center::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
